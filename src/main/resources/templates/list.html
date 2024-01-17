@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>도서목록</h2>
+	<a href="/">시작화면</a>
+	<table>
+		<tr>
+			<td>도서번호</td>
+			<td>도서명</td>
+			<td>저자</td>
+			<td>출판사</td>
+			<td>가격</td>
+		</tr>
+		<tr th:each="book: ${bookList}">
+			<!-- book : 리스트에서 하나씩 가져오려는 변수를 담는 상자 -->
+			<td><a th:href="@{|/book/${book.id}|}" th:text="${book.id}"></a>
+			</td>
+			<td th:text="${book.bookName}"></td>
+			<td th:text="${book.bookAuthor}"></td>
+			<td th:text="${book.bookPublisher}"></td>
+			<td th:text="${book.bookPrice}"></td>
+			<td>
+				<button th:onclick="detail([[${book.id}]])">조회</button>
+			</td>
+			<td>
+				<button th:onclick="update_fn([[${book.id}]])">수정</button>
+			</td>
+			<td>
+				<button th:onclick="delete_fn([[${book.id}]])">삭제</button>
+			</td>
+		</tr>
+
+	</table>
+
+</body>
+<script th:inline="javascript">
+	const detail = (id) => {
+		console.log("클릭한 id", id);	
+		// 1번클릭 => /student/1, 2번클릭 => /student/2
+		// location.href = "/student/" + id;
+		 location.href = `/detail/${id}`;
+	
+	}
+	 const update_fn = (id) => {
+         console.log("클릭한 id");
+         location.href = `/book/update/${id}`;
+     }
+		const delete_fn = (id) => {
+			location.href = `/book/delete/${id}`;
+			}
+</script>
+</html>

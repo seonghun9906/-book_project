@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book">
+	<insert id="save" parameterType="com.example.book.DTO.BookDTO">
+		insert into book_table(bookName,
+		bookAuthor, bookPublisher, bookPrice)
+		values(#{bookName},
+		#{bookAuthor}, #{bookPublisher}, #{bookPrice})
+	</insert>
+
+	<select id="findAll" resultType="com.example.book.DTO.BookDTO">
+		select * from book_table
+	</select>
+
+	<select id="findById" parameterType="Long"
+		resultType="com.example.book.DTO.BookDTO">
+		select * from book_table where id=#{id}
+	</select>
+
+	<delete id="delete" parameterType="Long">
+		delete from book_table where
+		id=#{id}
+	</delete>
+
+	<update id="update" parameterType="com.example.book.DTO.BookDTO">
+		update book_table set
+		bookPublisher=#{bookPublisher}, bookPrice=#{bookPrice}
+		where id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>수정 화면</h2>
+	<a href="/list">목록으로 돌아가기</a>
+
+
+	<form action="/update" method="post">
+		<!-- id를 데려오는 소스코드 / type = hidden : id값이 화면상으로 노출은 안됨.-->
+		<input type="hidden" name="id" th:value="${book.id}">
+		<!-- 도서명과 저자는 수정 못하게 만들때에는 readonly 가 필요함 -->
+		도서명 : <input type="text" name="bookName" th:value="${book.bookName}"
+			readonly> <br> 저자 : <input type="text" name="bookAuthor"
+			th:value="${book.bookAuthor}" readonly> <br> 출판사 : <input
+			type="text" name="bookPublisher" th:value="${book.bookPublisher}">
+		<br> 가격 : <input type="text" name="bookPrice"
+			th:value="${book.bookPrice}"> <br> <input type="submit"
+			value="수정">
+	</form>
+
+</body>
+
+</html>
